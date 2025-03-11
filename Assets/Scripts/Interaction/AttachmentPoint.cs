@@ -64,12 +64,21 @@ public class AttachmentPoint : MonoBehaviour
             obj.transform.localRotation = Quaternion.Euler(expectedObjectRotation);
         }
 
-        // Temporarily set collider to trigger
-        Collider objCollider = obj.GetComponent<Collider>();
-        if (objCollider != null)
+        // NEW CODE START - Better collider management
+        // Handle all colliders in the object and its children
+        Collider[] allColliders = obj.GetComponentsInChildren<Collider>(true);
+        foreach (Collider collider in allColliders)
         {
-            objCollider.isTrigger = true;
+            collider.isTrigger = true;
         }
+        
+        // Make sure the main collider is always active for interactions
+        Collider mainCollider = obj.GetComponent<Collider>();
+        if (mainCollider != null)
+        {
+            mainCollider.enabled = true;
+        }
+        // NEW CODE END
 
         // Set visibility
         Renderer renderer = obj.GetComponent<Renderer>();
@@ -94,6 +103,21 @@ public class AttachmentPoint : MonoBehaviour
         {
             interactable.isAttached = true;
         }
+        
+        // Ana objeye yeni obje attach edildiğini haber ver
+        // Hierarchide parent objeleri arayarak AttachmentPointManager'ı bul
+        Transform currentTransform = transform;
+        while (currentTransform != null)
+        {
+            AttachmentPointManager manager = currentTransform.GetComponent<AttachmentPointManager>();
+            if (manager != null)
+            {
+                // Yeni obje eklendiğini haber ver
+                manager.OnObjectAttached(obj);
+                break;
+            }
+            currentTransform = currentTransform.parent;
+        }
     }
 
     public GameObject DetachObject()
@@ -112,6 +136,14 @@ public class AttachmentPoint : MonoBehaviour
         {
             renderer.enabled = true;
         }
+        
+        // NEW CODE START - Restore collider states
+        Collider[] allColliders = obj.GetComponentsInChildren<Collider>(true);
+        foreach (Collider collider in allColliders)
+        {
+            collider.isTrigger = false;
+        }
+        // NEW CODE END
 
         isOccupied = false;
         attachedObject = null;

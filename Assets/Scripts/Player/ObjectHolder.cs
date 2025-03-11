@@ -135,6 +135,19 @@ public class ObjectHolder : MonoBehaviour
             heldObject.Attach(point.transform);
             point.AttachObject(heldObject.gameObject);
             heldObject.ShowOutline(false);
+            
+            // Attachment işleminden sonra parent objelerdeki tüm AttachmentPointManager'ları güncelle
+            Transform currentTransform = point.transform;
+            while (currentTransform != null)
+            {
+                AttachmentPointManager manager = currentTransform.GetComponent<AttachmentPointManager>();
+                if (manager != null)
+                {
+                    manager.RefreshChildManagers();
+                }
+                currentTransform = currentTransform.parent;
+            }
+            
             heldObject = null;
             isHolding = false;
         }

@@ -31,8 +31,16 @@ public class InteractionDetector : MonoBehaviour
         
         if (hits.Length > 0)
         {
+            // NEW CODE START - Sort hits by distance
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            // NEW CODE END
+            
             // Store the first hit for surface detection
             primaryHit = hits[0];
+            
+            // NEW CODE START - Create a list to collect potential interactables
+            List<InteractableObject> potentialInteractables = new List<InteractableObject>();
+            // NEW CODE END
             
             // Process hits to find interactable objects
             foreach (RaycastHit hit in hits)
@@ -41,8 +49,10 @@ public class InteractionDetector : MonoBehaviour
                 InteractableObject directInteractable = hit.collider.GetComponent<InteractableObject>();
                 if (directInteractable != null)
                 {
-                    interactable = directInteractable;
-                    return true;
+                    // NEW CODE START - Add to potential interactables instead of returning immediately
+                    potentialInteractables.Add(directInteractable);
+                    continue;
+                    // NEW CODE END
                 }
                 
                 // Check attachment points
@@ -55,8 +65,10 @@ public class InteractionDetector : MonoBehaviour
                         InteractableObject attachedInteractable = attachedObj.GetComponent<InteractableObject>();
                         if (attachedInteractable != null)
                         {
-                            interactable = attachedInteractable;
-                            return true;
+                            // NEW CODE START - Add to potential interactables instead of returning immediately
+                            potentialInteractables.Add(attachedInteractable);
+                            continue;
+                            // NEW CODE END
                         }
                     }
                 }
@@ -65,10 +77,22 @@ public class InteractionDetector : MonoBehaviour
                 InteractableObject interactableInHierarchy = FindInteractableInHierarchy(hit.transform);
                 if (interactableInHierarchy != null)
                 {
-                    interactable = interactableInHierarchy;
-                    return true;
+                    // NEW CODE START - Add to potential interactables instead of returning immediately
+                    potentialInteractables.Add(interactableInHierarchy);
+                    continue;
+                    // NEW CODE END
                 }
             }
+            
+            // NEW CODE START - Choose the best interactable based on priority criteria
+            if (potentialInteractables.Count > 0)
+            {
+                // For now, just use the first one (closest to camera)
+                // You could implement a priority system here if needed
+                interactable = potentialInteractables[0];
+                return true;
+            }
+            // NEW CODE END
             
             // No interactable found but we have a hit
             return true;
