@@ -5,11 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Surface
-  - KeyboardCase
+  - Case
   - PCB
-  - Stabilizer
   - Switch
-  - Keycap
   layers:
   - Default
   - TransparentFX
