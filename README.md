@@ -21,3 +21,6 @@ This project is a demonstration of a first-person player controller with interac
 
 *   Different types of interactions (e.g., puzzles, levers, buttons).
 *   Sound effects for all interactions.
+
+![Ekran görüntüsü 2025-05-23 134317](https://github.com/user-attachments/assets/5c176823-fe2e-4cf4-bde4-d5b27681da62)
+![Ekran görüntüsü 2025-05-23 134341](https://github.com/user-attachments/assets/da3f0788-d73a-4f52-af9d-3abdf12403c0)
