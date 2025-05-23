@@ -644,7 +644,6 @@ MonoBehaviour:
   rotateAttached: 0
   gizmoColor: {r: 0.2495799, g: 1, b: 0, a: 1}
   gizmoSize: 0.05
-  showDirectionArrow: 1
   expectedObjectSize: {x: 0.5, y: 0.05, z: 1}
   expectedObjectRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &148980428
@@ -1403,7 +1402,6 @@ MonoBehaviour:
   rotateAttached: 0
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   gizmoSize: 0.05
-  showDirectionArrow: 1
   expectedObjectSize: {x: 0.5, y: 0.05, z: 1}
   expectedObjectRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &312050099
@@ -1963,8 +1961,6 @@ MonoBehaviour:
   objectName: PCB
   canAttach: 1
   attachableToTag: KeyboardCase
-  attachPositionOffset: {x: 0, y: 0, z: 0}
-  attachRotationOffset: {x: 0, y: 0, z: 0}
   outlineColor: {r: 0.18, g: 0.8, b: 1, a: 1}
   outlineWidth: 4
   isAttached: 0
@@ -3164,8 +3160,6 @@ MonoBehaviour:
   objectName: Case
   canAttach: 0
   attachableToTag: 
-  attachPositionOffset: {x: 0, y: 0, z: 0}
-  attachRotationOffset: {x: 0, y: 0, z: 0}
   outlineColor: {r: 0.18, g: 0.8, b: 1, a: 1}
   outlineWidth: 4
   isAttached: 0
@@ -3576,8 +3570,6 @@ MonoBehaviour:
   objectName: PCB
   canAttach: 1
   attachableToTag: KeyboardCase
-  attachPositionOffset: {x: 0, y: 0, z: 0}
-  attachRotationOffset: {x: 0, y: 0, z: 0}
   outlineColor: {r: 0.18, g: 0.8, b: 1, a: 1}
   outlineWidth: 4
   isAttached: 0
@@ -5187,26 +5179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7570271696633074eb13b997404b93e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
-  interactableColor:
-    r: 1
-    g: 0.92156863
-    b: 0.015686275
-    a: 1
-  holdingColor:
-    r: 0
-    g: 1
-    b: 0
-    a: 1
-  crosshairSize: 25
-  thickness: 2
-  gap: 5
-  crosshairImage: {fileID: 1469977366}
-  playerInteraction: {fileID: 0}
 --- !u!1 &2057019887
 GameObject:
   m_ObjectHideFlags: 0

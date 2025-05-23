@@ -11,19 +11,16 @@ public class AttachmentPointManager : MonoBehaviour
     [Tooltip("Automatically select nearest attachment point")]
     public bool autoSelectNearestPoint = true;
 
-    // En son highlight edilen takma noktası
     private AttachmentPoint lastHighlightedPoint = null;
 
     private void Start()
     {
-        // Eğer attachmentPoints boşsa, otomatik olarak alt nesnelerdeki AttachmentPoint'leri bul
         if (attachmentPoints.Count == 0)
         {
             attachmentPoints.AddRange(GetComponentsInChildren<AttachmentPoint>());
         }
     }
 
-    // Kullanabilir takma noktalarını döndürür
     public List<AttachmentPoint> GetAvailablePoints(string attachableTag)
     {
         List<AttachmentPoint> availablePoints = new List<AttachmentPoint>();
@@ -39,10 +36,8 @@ public class AttachmentPointManager : MonoBehaviour
         return availablePoints;
     }
 
-    // Bu metot bir obje yaklaştığında uygun takma noktalarını vurgular
     public void HighlightAvailablePoints(GameObject obj, bool highlight)
     {
-        // Eğer highlight kapatılıyorsa, tüm noktaların vurgusunu kaldır
         if (!highlight)
         {
             foreach (AttachmentPoint point in attachmentPoints)
@@ -53,7 +48,6 @@ public class AttachmentPointManager : MonoBehaviour
             return;
         }
 
-        // Objenin tag'ine uygun takma noktalarını vurgula
         string objTag = obj.tag;
         foreach (AttachmentPoint point in attachmentPoints)
         {
@@ -74,7 +68,6 @@ public class AttachmentPointManager : MonoBehaviour
         return lastHighlightedPoint;
     }
 
-    // En yakın uygun takma noktasını bulur
     public AttachmentPoint GetNearestAttachmentPoint(GameObject obj, Vector3 position)
     {
         AttachmentPoint nearestPoint = null;
